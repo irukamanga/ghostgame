@@ -16,7 +16,7 @@
     .scoreboard{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;border:1px solid var(--line);background:#15110ee6;border-radius:6px;padding:14px 20px;margin-bottom:14px;box-shadow:inset 0 0 0 1px #0008}.score{text-align:center}.score strong{font-size:2.25rem;color:var(--yellow);display:block}.score span{color:var(--muted);letter-spacing:.12em}.versus{font-size:.85rem;color:var(--orange);letter-spacing:.18em}.turn{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px}.turn p{font-size:1.1rem;margin:0}.badge{padding:6px 12px;border:1px solid #b3584f;border-radius:3px;background:var(--orange);color:#f3ead8;font-size:.82rem}
     /* 一人称視点: .table が視点(perspective)。奥にCPU、.felt を rotateX で奥へ倒したテーブル */
     .stage{position:relative;overflow:hidden;border:1px solid #594f41;border-radius:10px;background:linear-gradient(#05070b33,#05070b77),url("assets/clown-stage-bg.webp") center top/cover no-repeat;box-shadow:0 24px 80px #000b,inset 0 1px #d8c7a31f}.table{position:relative;width:78%;margin-left:0;overflow:hidden;border:0;background:transparent;perspective:900px;perspective-origin:50% 0;padding:clamp(205px,28vw,245px) clamp(18px,4vw,42px) clamp(100px,14vw,130px)}
-    .cpu{position:absolute;left:50%;top:clamp(4px,1vw,10px);width:clamp(205px,38vw,305px);height:clamp(255px,49vw,400px);translate:-50% 0;filter:drop-shadow(0 10px 15px #000b);transform-origin:50% 88%;animation:clownIdle 3.8s ease-in-out infinite}.cpu-body{display:block;width:100%;height:100%;object-fit:contain;object-position:50% 0}.cpu-reaction{position:absolute;left:50%;top:4%;width:76%;height:48%;object-fit:cover;object-position:50% 46%;clip-path:ellipse(39% 40% at 50% 52%);translate:-50% 0;opacity:0;scale:.82;transition:opacity .15s,scale .18s;pointer-events:none}.cpu-reaction.show{opacity:1;scale:1}.judge{position:absolute;right:-24%;top:5%;width:63%;height:clamp(780px,105vw,930px);z-index:4;user-select:none;pointer-events:none}.judge img{display:block;width:100%;height:100%;object-fit:contain;object-position:center top;filter:drop-shadow(0 8px 8px #000c)}
+    .cpu{position:absolute;left:50%;top:clamp(4px,1vw,10px);width:clamp(205px,38vw,305px);height:clamp(255px,49vw,400px);translate:-50% 0;filter:drop-shadow(0 10px 15px #000b);transform-origin:50% 88%;animation:clownIdle 3.8s ease-in-out infinite}.cpu-body{display:block;width:100%;height:100%;object-fit:contain;object-position:50% 0}.cpu-reaction{position:absolute;left:50%;top:4%;width:76%;height:48%;object-fit:cover;object-position:50% 46%;clip-path:ellipse(39% 40% at 50% 52%);translate:-50% 0;opacity:0;scale:.82;transition:opacity .15s,scale .18s;pointer-events:none}.cpu-reaction.show{opacity:1;scale:1}.judge{position:absolute;right:-24%;top:5%;width:63%;height:clamp(780px,105vw,930px);z-index:4;user-select:none;pointer-events:none}/* ジャッジ画像は黒背景つき。画像の箱をそのまま中央に置き、左右と上下の端をぼかして暗いステージになじませる */.judge img{display:block;height:100%;width:auto;max-width:none;margin-left:50%;translate:-50% 0;-webkit-mask-image:linear-gradient(to right,transparent 0,#000 24%,#000 76%,transparent 100%),linear-gradient(transparent 0,#000 5%,#000 96%,transparent 100%);-webkit-mask-composite:source-in;mask-image:linear-gradient(to right,transparent 0,#000 24%,#000 76%,transparent 100%),linear-gradient(transparent 0,#000 5%,#000 96%,transparent 100%);mask-composite:intersect}
     @keyframes clownIdle{0%,100%{transform:rotate(-.7deg) translateY(0)}50%{transform:rotate(.7deg) translateY(-3px)}}
     .felt{position:absolute;left:2%;right:2%;bottom:0;height:74%;background:#050505 url("assets/clown-table.webp") center/100% 100% no-repeat;clip-path:polygon(12% 29%,88% 29%,97% 42%,100% 63%,96% 86%,78% 100%,22% 100%,4% 86%,0 63%,3% 42%)}
     .dice{position:relative;z-index:1;display:grid;grid-template-columns:repeat(5,1fr);gap:clamp(6px,1.6vw,14px);max-width:680px;margin:clamp(28px,5vw,48px) auto 0}.die{position:relative;aspect-ratio:1;padding:0;border:2px solid transparent;border-radius:8px;background:none;container-type:inline-size;perspective:320px;cursor:pointer;transition:transform .15s,border-color .15s,box-shadow .15s}.die::before{content:"";position:absolute;inset:auto 14% 3%;height:14%;border-radius:50%;background:#000a;filter:blur(4px)}.die:hover{transform:translateY(-2px)}.die.selected{border-color:var(--yellow);background:#b59a5b1f;box-shadow:0 0 0 4px #b59a5b38;transform:translateY(-5px)}.die.locked{filter:grayscale(1);opacity:.32}.die:disabled{cursor:default}
@@ -26,6 +26,17 @@
     .kind{position:absolute;right:3%;top:2%;font-size:max(11px,15cqi);line-height:1;padding:2px 4px;border-radius:3px;background:#0d0b0acc;color:var(--ink);pointer-events:none;font-family:system-ui,sans-serif}.kind.k-curse{color:#d6b6ff}.kind.k-gold{color:#f1cf6a}.kind.k-fuse{color:#ff9a5c}.kind.k-wild{color:#8fc1ff}
     .k-curse .pip{background:#3d2b4a;color:#ecdcf7}.k-curse .pip.scar{background:#362640}.k-gold .pip{background:linear-gradient(145deg,#f6dd8f,#c69b3b);color:#3a2905}.k-gold .pip.scar{background:linear-gradient(145deg,#e9cf80,#b98e33)}.k-fuse .pip{background:#d9c0a6;color:#3b1608}.k-fuse .pip.scar{background:#ccb193}.pip.star{color:#2357b5;font-size:46cqi;font-weight:700}
     .memo .kind-name{color:var(--yellow);font-weight:400}
+    /* D: よく出る目のかすれ（偏りの面の目を薄く・にじませる）。最終局面ではさらに強く */
+    .pip.worn{color:#1c191594;text-shadow:0 0 1.2cqi #f1eadb}.pip.worn .clown-mark{opacity:.55;filter:contrast(.8) blur(.4px)}.k-curse .pip.worn{color:#ecdcf785;text-shadow:0 0 1.2cqi #3d2b4a}.k-gold .pip.worn{color:#3a290580;text-shadow:0 0 1.2cqi #e9cf80}.k-fuse .pip.worn{color:#3b160880}
+    body.final .pip.worn{color:#1c191560}body.final .pip.worn .clown-mark{opacity:.4}
+    /* 12: 最終局面（2-2）。照明を落として卓だけスポット、ピエロの揺れが速くなる */
+    .stage::after{content:"";position:absolute;inset:0;z-index:5;pointer-events:none;background:radial-gradient(ellipse 60% 55% at 40% 72%,transparent 35%,#000d 85%);opacity:0;transition:opacity 1.2s}body.final .stage::after{opacity:1}body.final .cpu{animation-duration:1.4s}
+    .final-banner{position:absolute;left:50%;top:12px;translate:-50% 0;z-index:6;padding:4px 18px;border:1px solid #b3584f;border-radius:3px;background:#2a0d0acc;color:#f3ead8;letter-spacing:.3em;font-size:.95rem;opacity:0;transition:opacity .8s;pointer-events:none}body.final .final-banner{opacity:1}
+    /* 宣伝動画用デモ（URLに ?demo を付けたときだけ表示） */
+    .demo{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:8px;margin-top:12px;padding:8px;border:1px dashed #b3584f88;border-radius:5px}.demo[hidden]{display:none}.demo span{color:#b3584f;font-size:.75rem;letter-spacing:.2em}.demo .tool:disabled{opacity:.4;cursor:not-allowed}
+    /* 1: すり替え */
+    .swap{margin-top:16px;text-align:center}.swap[hidden]{display:none}.swap p{margin:0 0 10px;color:var(--yellow)}.swap-cands{display:grid;grid-template-columns:repeat(3,minmax(0,96px));justify-content:center;gap:14px;margin-bottom:10px}.swap-cands .die{background:#15110e;border-color:var(--line)}.die.swapping{border-color:#b3584f;box-shadow:0 0 0 4px #b3584f55}
+    .judge.caught img{animation:caught .5s ease-in-out 2}@keyframes caught{25%{transform:translateX(-6px) rotate(-1.5deg)}75%{transform:translateX(6px) rotate(1.5deg)}}
     /* 立方体: 選択枠の約2/3サイズ。外側=.dieの移動、内側=.cubeの回転 */
     .cube{position:absolute;inset:24.5%;transform-style:preserve-3d}.pip{position:absolute;inset:0;display:grid;place-items:center;border-radius:14%;background:#f1eadb;color:#1c1915;font-size:36cqi;line-height:1;backface-visibility:hidden;box-shadow:inset 0 0 0 1px #0005,inset 0 -2cqi 4cqi #0003}.pip.scar{background:#e7dfd0}.pip.scar::after{content:"";position:absolute;inset:7%;border-radius:18%;mix-blend-mode:multiply;pointer-events:none}.pip.scar-1::after{background:repeating-linear-gradient(115deg,transparent 0 14%,#21191442 15% 16%,transparent 17% 28%)}.pip.scar-2::after{background:linear-gradient(25deg,transparent 35%,#241a153d 37% 39%,transparent 41%),radial-gradient(circle at 72% 28%,#20171240 0 7%,transparent 8%)}.pip.scar-3::after{background:repeating-linear-gradient(70deg,transparent 0 20%,#17120e35 21% 23%,transparent 24% 36%)}.clown-mark{width:82%;height:82%;object-fit:contain;filter:contrast(1.15)}.actions{display:flex;justify-content:center;gap:12px}.roll,.reset{border-radius:3px;padding:13px 25px;font:inherit;font-weight:700;letter-spacing:.08em;cursor:pointer}.roll{border:1px solid #b3584f;background:var(--orange);color:#f3ead8;box-shadow:0 4px 0 #541913}.roll:disabled{filter:grayscale(1);opacity:.45;cursor:not-allowed}.reset{background:#17120e;border:1px solid var(--line);color:var(--ink)}.reset:disabled{opacity:.45;cursor:not-allowed}.actions{margin-top:18px}.used{margin:0 0 12px;color:var(--muted)}.used b{color:var(--yellow);letter-spacing:.15em}.message{min-height:1.6em;text-align:center;margin:20px 0 0;color:var(--yellow);font-size:1.05rem}.howto{color:var(--muted);text-align:center;font-size:.88rem;line-height:1.8;margin:16px 0 0}
     .guard{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:8px;margin-top:16px}.guard[hidden]{display:none}#guardFaces{display:contents}.guard p{width:100%;margin:0;text-align:center;color:var(--yellow)}.face{width:48px;aspect-ratio:1;border:2px solid transparent;border-radius:5px;background:#f1eadb;color:#1c1915;font-size:1.6rem;cursor:pointer}.face .clown-mark{display:block;width:100%;height:100%}.face[aria-pressed=true]{border-color:var(--yellow);box-shadow:0 0 0 4px #b59a5b45}
@@ -59,21 +70,23 @@
     <section class="scoreboard" aria-label="スコア"><div class="score"><strong id="playerScore">0</strong><span>PLAYER</span></div><div class="versus">VS</div><div class="score"><strong id="cpuScore">0</strong><span>CPU</span></div></section>
     <div class="turn"><p id="turnText">あなたのターン</p><span class="badge" id="roundText">ROUND 1</span></div>
     <p class="used">獲得済みの目（両者共通・再得点不可）: <b id="usedFaces">なし</b></p>
-    <p class="used"><span id="blocker">CPU</span>のブロック目（このぞろ目は無効）: <b id="blockFace">-</b>　不成立 <b id="missCount">0/6</b></p>
-    <div class="stage">
+    <p class="used"><span id="blocker">CPU</span>のブロック目（このぞろ目は無効）: <b id="blockFace">-</b>　不成立 <b id="missCount">0/6</b>　ジャッジの疑い <b id="suspicion">0%</b></p>
+    <div class="stage"><div class="final-banner" aria-hidden="true">最終局面</div>
       <section class="table" aria-label="ダイステーブル">
         <div class="cpu"><img class="cpu-body" src="assets/clown-opponent.webp" alt="対戦相手のピエロ"><img class="cpu-reaction" id="cpuReaction" src="assets/clown-shocked-face.webp" alt="" aria-hidden="true"></div>
         <div class="felt" aria-hidden="true"></div>
         <div class="dice" id="dice"></div>
       </section>
-      <div class="judge"><img src="assets/judge-woman.webp" alt="テーブル右側に立つ女性ジャッジ"></div>
+      <div class="judge"><img src="assets/judge-bunny.webp" alt="テーブル右側に立つバニー姿のジャッジ"></div>
     </div>
-    <div class="actions"><button class="roll" id="roll" disabled aria-keyshortcuts="R Enter">3個を選んでロール</button><button class="reset" id="reset">リスタート</button></div>
+    <div class="actions"><button class="roll" id="roll" disabled aria-keyshortcuts="R Enter">3個を選んでロール</button><button class="reset" id="swapBtn" type="button">🤫 すり替え</button><button class="reset" id="reset">リスタート</button></div>
+    <div class="demo" id="demoBar" role="group" aria-label="宣伝動画用デモ操作" hidden><span>DEMO</span><button class="tool" id="demoWarp" type="button">⚡ ワープ（ぞろ目）</button><button class="tool" id="demoWin" type="button">🏆 勝利</button><button class="tool" id="demoLose" type="button">💀 敗北</button></div>
+    <div class="swap" id="swapPanel" role="group" aria-labelledby="swapLabel" hidden><p id="swapLabel"></p><div class="swap-cands" id="swapCands"></div><button class="reset" id="swapCancel" type="button">やめる</button></div>
     <div class="guard" id="guard" role="group" aria-labelledby="guardLabel" hidden><p id="guardLabel">CPUが投げる前に、ブロックする目を選んで確定</p><span id="guardFaces"></span><button class="roll" id="confirm" disabled>確定</button></div>
     <p class="message" id="message" aria-live="polite">振るダイスを3個選んでください</p>
     <div class="tip" id="tip" role="status" hidden><span id="tipText"></span><button type="button" id="tipClose" aria-label="解説を閉じる">×</button></div>
     <section class="memo" id="memo" aria-labelledby="memoTitle" hidden><h2 id="memoTitle">観察メモ</h2><p>このゲームで見えた出目の記録（新しい順・最大12回）。傷の位置と模様で個体を見分けられます。</p><ol id="memoList"></ol></section>
-    <p class="howto">ダイスをクリック、または <kbd>1</kbd>〜<kbd>9</kbd>・<kbd>0</kbd>（10番）キーで選択。<kbd>R</kbd>/<kbd>Enter</kbd> でロール。ブロック目は <kbd>1</kbd>〜<kbd>6</kbd> → <kbd>Enter</kbd>。詳しくは「？ ルール」へ。</p>
+    <p class="howto">ダイスをクリック、または <kbd>1</kbd>〜<kbd>9</kbd>・<kbd>0</kbd>（10番）キーで選択。<kbd>R</kbd>/<kbd>Enter</kbd> でロール。ブロック目は <kbd>1</kbd>〜<kbd>6</kbd> → <kbd>Enter</kbd>。<kbd>Esc</kbd> ですり替えを中止。詳しくは「？ ルール」へ。</p>
   </main>
   <dialog id="rules" aria-labelledby="rulesTitle">
     <h2 id="rulesTitle">遊び方</h2>
@@ -81,8 +94,9 @@
     <section data-page hidden><p><b>選べないダイスと、ブロック目</b></p><ul><li>直前に相手が使った3個は灰色になり、次の手番では選べません。</li><li>相手が投げる前に、出させたくない目を1つ「ブロック」します。ブロック目のぞろ目は無効です。</li><li>CPUのブロック目は非公開。読み合いです。</li></ul></section>
     <section data-page hidden><p><b>特殊な出目</b></p><ul><li>🤡が3つ：全ダイス交換、獲得済みの目もリセット（得点なし）。ただし2-2のときは🤡×3で勝利。</li><li>1-2-3のような3連番：相手の手番を飛ばして追加手番。</li><li>ぞろ目なしが6回続く：全ダイス交換（獲得済みの目は維持）。</li></ul></section>
     <section data-page hidden><p><b>イカサマを見抜け</b></p><ul><li>ダイスは1個ずつ癖があり、特定の目が出やすいものが混じっています。</li><li>傷の位置と模様で個体を見分け、「観察メモ」で過去の出目を確認できます。</li><li>CPUの強さ：よわい＝でたらめ／ふつう＝見えた出目から推理／つよい＝癖を知り尽くしている。</li></ul></section>
+    <section data-page hidden><p><b>見抜くコツ・すり替え・最終局面</b></p><ul><li><b>目のかすれ</b>：よく出る目は手に触れられ続けて、目のくぼみがかすれている。</li><li><b>揺れ戻しと音</b>：癖の強いダイスほど、止まる直前に重く「ゴトッ」と揺れ戻す。2つの目に癖があるダイスはふらふら揺れる。</li><li><b>🤫 すり替え</b>：自分の手番に、テーブルの1個を控えの3個のどれかとこっそり交換できる。使うほどジャッジの疑いが高まり、見つかると1PT没収（疑いは毎ラウンド少しずつ下がる）。</li><li><b>最終局面</b>：2-2になると照明が落ち、ダイスの癖がいっそう目立つ。</li></ul></section>
     <section data-page hidden><p><b>特殊ダイス（右上のしるしで見分ける）</b></p><ul><li><b>呪</b> 呪いのダイス：よく揃う。ただし使うと、次に自分が受けるブロック目が2つになる。</li><li><b>🔥</b> 導火線ダイス：使われるたびに数字が減り、0で爆発。爆発させた側は次の手番を失う（3連番の追加手番も消える）。</li><li><b>金</b> 金のダイス：これを含むぞろ目は、獲得済みの目でも1PT。</li><li><b>★</b> ワイルドダイス：★の面は他の2個と同じ目になる（3連番には使えない）。</li></ul></section>
-    <div class="pager"><button class="reset" id="rulesPrev" type="button">戻る</button><span id="rulesPage">1 / 5</span><button class="roll" id="rulesNext" type="button">次へ</button></div>
+    <div class="pager"><button class="reset" id="rulesPrev" type="button">戻る</button><span id="rulesPage">1 / 6</span><button class="roll" id="rulesNext" type="button">次へ</button></div>
   </dialog>
   <script>
     const faces=['🤡','⚁','⚂','⚃','⚄','⚅'];
@@ -95,7 +109,7 @@
     function shuffle(a,rnd=Math.random){const b=[...a];for(let i=b.length-1;i>0;i--){const j=Math.floor(rnd()*(i+1));[b[i],b[j]]=[b[j],b[i]]}return b}
     // turn=投げる側、block=防御側の指定目の配列（通常1つ、呪いで2つ）、defend=プレイヤーがブロック目を選択中、pick=確定前の選択、need=選ぶ個数、misses=連続不成立、level=このゲームのCPUの強さ
     // curse[who]=次に who が受けるブロック目が2つになる / skip[who]=導火線の爆発で who の次の手番を飛ばす
-    function fresh(level=store.get('dd-level','normal')){const pool=newPool(),s={pool,dice:shuffle(pool.slice(0,10)),reserve:pool.slice(10),used:new Set(),selected:new Set(),locked:new Set(),player:0,cpu:0,round:1,busy:false,over:false,turn:'player',block:[],defend:false,pick:[],need:1,misses:0,throws:0,curse:{player:false,cpu:false},skip:{player:false,cpu:false},level:LEVELS[level]?level:'normal'};s.block=cpuBlock(s);return s}
+    function fresh(level=store.get('dd-level','normal')){const pool=newPool(),s={pool,dice:shuffle(pool.slice(0,10)),reserve:pool.slice(10),used:new Set(),selected:new Set(),locked:new Set(),player:0,cpu:0,round:1,busy:false,over:false,turn:'player',block:[],defend:false,pick:[],need:1,misses:0,throws:0,curse:{player:false,cpu:false},skip:{player:false,cpu:false},suspicion:0,swapMode:0,swapIdx:-1,swapCands:[],level:LEVELS[level]?level:'normal'};s.block=cpuBlock(s);return s}
     // weights[i] は目(i+1)の重み。r∈[0,1) で加重抽選し 1〜6 を返す
     function pick(weights,r){let x=r*weights.reduce((a,b)=>a+b,0);return weights.findIndex(w=>(x-=w)<0)+1||weights.length}
     // 1面特化は80%、隣接2面特化は合計約83%。対向面(和が7)は隣接扱いにしない
@@ -142,7 +156,11 @@
     function noise(dur,{vol=.2,at=0,freq=1800}={}){const c=ac();if(!c)return;const t=c.currentTime+at,b=c.createBuffer(1,Math.ceil(c.sampleRate*dur),c.sampleRate),d=b.getChannelData(0);for(let i=0;i<d.length;i++)d[i]=(Math.random()*2-1)*(1-i/d.length)**2;const s=c.createBufferSource(),f=c.createBiquadFilter(),g=c.createGain();s.buffer=b;f.type='bandpass';f.frequency.value=freq;g.gain.value=vol;s.connect(f).connect(g).connect(c.destination);s.start(t)}
     const sfx={
       select(){tone(880,.05,{type:'sine',vol:.05})},
-      land(){noise(.07,{vol:.35,freq:rand(1400,2600)});tone(rand(180,240),.06,{vol:.05})},
+      // C: h=癖の重さ（0=ワイルドの軽い音 … 2=呪いの重い「ゴトッ」）
+      land(h=0){noise(.07+.035*h,{vol:.35+.06*h,freq:rand(1400,2600)/(1+h*.9)});tone(rand(180,240)/(1+h*.55),.06+.05*h,{vol:.05+.04*h})},
+      caught(){tone(880,.12,{type:'square',vol:.07});tone(660,.3,{type:'square',vol:.07,at:.13})},
+      sneak(){noise(.18,{vol:.12,freq:4200})},
+      beat(){tone(52,.14,{type:'sine',vol:.28});tone(48,.16,{type:'sine',vol:.22,at:.2})},
       score(){[523,659,784,1047].forEach((f,i)=>tone(f,.22,{at:i*.09,vol:.1}))},
       blocked(){tone(160,.35,{type:'square',vol:.06,to:90})},
       used(){tone(330,.14,{vol:.08});tone(262,.22,{at:.13,vol:.08})},
@@ -163,7 +181,7 @@
     function recordResult(level,won,round){const all=store.get('dd-stats',{}),s=all[level]||{w:0,l:0,best:0};won?(s.w++,s.best=s.best?Math.min(s.best,round):round):s.l++;all[level]=s;store.set('dd-stats',all)}
 
     /* ---- 初回だけの一言解説 ---- */
-    const TIPS={defend:'CPUが投げる前に、出させたくない目を1つブロックします。その目のぞろ目は無効です。',locked:'灰色のダイスは、直前に相手が使った3個。次の手番では選べません。',blocked:'ブロック目のぞろ目は、得点も🤡の効果も無効になります。',used:'一度得点された目は、両者共通で二度と得点できません。',clown:'🤡が3つ揃うと全ダイス交換＆獲得済みの目がリセット。2-2のときだけは🤡×3で勝利です。',run:'1-2-3のような3連番は、相手の手番を飛ばして追加手番になります。',swap:'ぞろ目なしが6回続くと全ダイス交換（獲得済みの目は維持）。',memo:'同じ目ばかり出るダイスはありませんか？「観察メモ」で過去の出目を確認できます。',curse:'呪いのダイス（紫）はよく揃うが、使うと次にあなたが受けるブロック目が2つになります。',fuse:'導火線ダイス（🔥）は使われるたびに残り回数が減り、0で爆発。爆発させた側は次の手番を失います。',gold:'金のダイスを含むぞろ目は、獲得済みの目でも1PTになります（ブロックは有効）。',wild:'ワイルドダイスの★は、他の2個と同じ目として数えます（3連番には使えません）。'};
+    const TIPS={swap:'すり替えは使うほどジャッジの疑いが高まります。控えの候補は、目のかすれ具合で癖を見抜けます。',final:'最終局面！ 照明が落ち、ダイスの癖（目のかすれ・揺れ戻し・着地音）がいっそう目立ちます。',defend:'CPUが投げる前に、出させたくない目を1つブロックします。その目のぞろ目は無効です。',locked:'灰色のダイスは、直前に相手が使った3個。次の手番では選べません。',blocked:'ブロック目のぞろ目は、得点も🤡の効果も無効になります。',used:'一度得点された目は、両者共通で二度と得点できません。',clown:'🤡が3つ揃うと全ダイス交換＆獲得済みの目がリセット。2-2のときだけは🤡×3で勝利です。',run:'1-2-3のような3連番は、相手の手番を飛ばして追加手番になります。',swap:'ぞろ目なしが6回続くと全ダイス交換（獲得済みの目は維持）。',memo:'同じ目ばかり出るダイスはありませんか？「観察メモ」で過去の出目を確認できます。',curse:'呪いのダイス（紫）はよく揃うが、使うと次にあなたが受けるブロック目が2つになります。',fuse:'導火線ダイス（🔥）は使われるたびに残り回数が減り、0で爆発。爆発させた側は次の手番を失います。',gold:'金のダイスを含むぞろ目は、獲得済みの目でも1PTになります（ブロックは有効）。',wild:'ワイルドダイスの★は、他の2個と同じ目として数えます（3連番には使えません）。'};
     const tipsSeen=new Set(store.get('dd-tips',[]));
     function tip(k){if(tipsSeen.has(k)||!TIPS[k])return;tipsSeen.add(k);store.set('dd-tips',[...tipsSeen]);$('tipText').textContent='💡 '+TIPS[k];$('tip').hidden=false}
 
@@ -186,19 +204,48 @@
     function render(){
       // 傷は偏りと独立した個体識別用。biasFaces/weightsは表示しない
       const focused=[...$('dice').children].indexOf(document.activeElement);
-      $('dice').replaceChildren(...state.dice.map((die,index)=>{const locked=state.locked.has(index),button=document.createElement('button');button.className='die'+(state.selected.has(index)?' selected':'')+(locked?' locked':'');button.innerHTML=cubeHtml(die)+`<span class="num" aria-hidden="true">${index+1}</span>`+(die.kind?`<span class="kind k-${die.kind}" aria-hidden="true">${kindBadge(die)}</span>`:'');button.firstChild.style.transform=rest(die.value);button.setAttribute('aria-label',`ダイス${index+1}${die.kind?`、${KIND_NAME[die.kind]}${die.kind==='fuse'?`（残り${die.fuse}回）`:''}`:''}、${isWild(die,die.value)?'★':die.value===1?'ピエロ':die.value+'の目'}${locked?'、前の手番で使用されたため選択不可':state.selected.has(index)?'、選択中':''}`);button.setAttribute('aria-keyshortcuts',String((index+1)%10));button.setAttribute('aria-pressed',state.selected.has(index));button.disabled=state.busy||state.over||state.defend||locked;button.onclick=()=>toggle(index);return button}));
+      $('dice').replaceChildren(...state.dice.map((die,index)=>{const locked=state.locked.has(index),button=document.createElement('button');button.className='die'+(state.selected.has(index)?' selected':'')+(locked?' locked':'')+(state.swapMode&&state.swapIdx===index?' swapping':'');button.innerHTML=cubeHtml(die)+`<span class="num" aria-hidden="true">${index+1}</span>`+(die.kind?`<span class="kind k-${die.kind}" aria-hidden="true">${kindBadge(die)}</span>`:'');button.firstChild.style.transform=rest(die.value);button.setAttribute('aria-label',`ダイス${index+1}${die.kind?`、${KIND_NAME[die.kind]}${die.kind==='fuse'?`（残り${die.fuse}回）`:''}`:''}、${isWild(die,die.value)?'★':die.value===1?'ピエロ':die.value+'の目'}${locked?'、前の手番で使用されたため選択不可':state.selected.has(index)?'、選択中':''}`);button.setAttribute('aria-keyshortcuts',String((index+1)%10));button.setAttribute('aria-pressed',state.selected.has(index));button.disabled=state.busy||state.over||state.defend||locked||state.swapMode===2;button.onclick=()=>toggle(index);return button}));
       if(focused>=0&&!state.busy)$('dice').children[focused].focus();
       $('playerScore').textContent=state.player;$('cpuScore').textContent=state.cpu;$('roundText').textContent=`ROUND ${state.round}`;
       $('usedFaces').textContent=[...state.used].sort().map(v=>faces[v-1]).join(' ')||'なし';
       $('blocker').textContent=state.turn==='player'?'CPU':'あなた';$('blockFace').textContent=state.turn==='player'?(state.block.length>1?'非公開（2つ・呪い）':'非公開'):state.block.length?state.block.map(f=>faces[f-1]).join(' '):'選択中…';$('missCount').textContent=`${state.misses}/${MISS_LIMIT}`;
       $('guard').hidden=!state.defend;$('guardLabel').textContent=state.need>1?`呪いの効果：CPUが投げる前に、ブロックする目を2つ選んで確定（${state.pick.length}/2）`:'CPUが投げる前に、ブロックする目を選んで確定';[...$('guardFaces').children].forEach((b,i)=>b.setAttribute('aria-pressed',state.pick.includes(i+1)));$('confirm').disabled=!state.defend||state.pick.length!==state.need;
-      $('roll').disabled=state.selected.size!==3||state.busy||state.over||state.defend;
+      $('roll').disabled=state.selected.size!==3||state.busy||state.over||state.defend||!!state.swapMode;
+      $('suspicion').textContent=`${state.suspicion}%`;$('swapBtn').disabled=!canSwap()&&!state.swapMode;$('swapBtn').textContent=state.swapMode?'🤫 すり替え中…':'🤫 すり替え';$('swapBtn').setAttribute('aria-pressed',!!state.swapMode);renderSwap();renderFinal();renderDemo();
       $('stats').textContent=statsText(state.level);renderMemo();
     }
-    function toggle(index){if(state.locked.has(index)||state.busy||state.over||state.defend)return;const had=state.selected.has(index);had?state.selected.delete(index):state.selected.size<3&&state.selected.add(index);if(had||state.selected.has(index))sfx.select();render()}
+    function toggle(index){if(state.swapMode===1)return chooseSwapTarget(index);if(state.locked.has(index)||state.busy||state.over||state.defend||state.swapMode)return;const had=state.selected.has(index);had?state.selected.delete(index):state.selected.size<3&&state.selected.add(index);if(had||state.selected.has(index))sfx.select();render()}
+    /* 1: すり替え。自分の手番に、テーブルの1個（ロック中以外）を控えから出た3個の候補のどれかと交換する。
+       疑いは使うたびに+35%、その時点の疑い%の確率でジャッジに見つかり、すり替え無効＋1PT没収。疑いは毎ラウンド-15% */
+    const SWAP_RISK=35,SWAP_DECAY=15;
+    const canSwap=()=>state.turn==='player'&&!state.busy&&!state.over&&!state.defend&&state.reserve.length>0;
+    function startSwap(){if(state.swapMode){cancelSwap();return}if(!canSwap())return;state.swapMode=1;state.selected.clear();$('message').textContent=`すり替えるテーブルのダイスを選んでください（見つかる確率 ${Math.min(100,state.suspicion+SWAP_RISK)}%）`;tip('swap');render()}
+    function chooseSwapTarget(index){if(state.locked.has(index))return;state.swapIdx=index;state.swapCands=shuffle(state.reserve).slice(0,3);state.swapMode=2;sfx.select();render();$('swapCands').firstChild?.focus()}
+    function cancelSwap(){Object.assign(state,{swapMode:0,swapIdx:-1,swapCands:[]});$('message').textContent='すり替えをやめました。振るダイスを3個選んでください';render()}
+    function doSwap(nd){if(state.swapMode!==2)return;const risk=Math.min(100,state.suspicion+SWAP_RISK),caught=Math.random()*100<risk,i=state.swapIdx;state.suspicion=risk;Object.assign(state,{swapMode:0,swapIdx:-1,swapCands:[]});
+      if(caught){const had=state.player>0;state.player=Math.max(0,state.player-1);$('message').textContent=`ジャッジに見つかった！ すり替えは無効${had?'、1PT没収':'（没収できる点はなし）'}`;sfx.caught();const j=document.querySelector('.judge');j.classList.remove('caught');void j.offsetWidth;j.classList.add('caught')}
+      else{const old=state.dice[i];state.reserve=state.reserve.filter(d=>d!==nd).concat(old);state.dice[i]=nd;state.selected.delete(i);$('message').textContent=`ダイス${i+1}をこっそりすり替えた…（ジャッジの疑い ${risk}%）`;sfx.sneak()}
+      render()}
+    function renderSwap(){$('swapPanel').hidden=state.swapMode!==2;if(state.swapMode!==2)return;$('swapLabel').textContent=`ダイス${state.swapIdx+1}と入れ替える控えのダイスを選ぶ（見つかる確率 ${Math.min(100,state.suspicion+SWAP_RISK)}%）`;$('swapCands').replaceChildren(...state.swapCands.map((d,k)=>{const b=document.createElement('button');b.type='button';b.className='die';b.innerHTML=cubeHtml(d)+(d.kind?`<span class="kind k-${d.kind}" aria-hidden="true">${kindBadge(d)}</span>`:'');b.firstChild.style.transform=rest(d.value);b.setAttribute('aria-label',`控えの候補${k+1}${d.kind?`、${KIND_NAME[d.kind]}`:''}、${isWild(d,d.value)?'★':d.value===1?'ピエロ':d.value+'の目'}`);b.onclick=()=>doSwap(d);return b}))}
+    /* 宣伝動画用デモ。通常の投擲・判定・演出をそのまま通し、出目だけ揃える。デモ中の勝敗は戦績に記録しない */
+    const DEMO=(()=>{try{return new URLSearchParams(location.search).has('demo')}catch{return false}})();
+    // 得点になる目: 獲得済みでもブロック目でもない2〜6。無ければ獲得済みを1つ空ける
+    function demoFace(){const ok=shuffle([2,3,4,5,6]).filter(f=>!state.used.has(f)&&!state.block.includes(f));if(ok.length)return ok[0];const f=[2,3,4,5,6].find(x=>!state.block.includes(x));state.used.delete(f);return f}
+    const demoReady=()=>state.turn==='player'&&!state.busy&&!state.over&&!state.defend&&!state.swapMode;
+    function demoPlayerTriple(){if(!demoReady())return;state.demo=true;state.force={player:demoFace()};state.selected=new Set([...Array(state.dice.length).keys()].filter(i=>!state.locked.has(i)).slice(0,3));playerTurn()}
+    function demoWarp(){demoPlayerTriple()}
+    function demoWin(){if(!demoReady())return;state.player=Math.max(state.player,2);render();demoPlayerTriple()}
+    // 敗北: CPUを2点にして、ブロックなしでCPUが揃える投擲を1回だけ行う
+    async function demoLose(){if(state.busy||state.over||state.swapMode)return;const g=gen;state.demo=true;Object.assign(state,{defend:false,pick:[],block:[],turn:'cpu',busy:true});state.cpu=Math.max(state.cpu,2);state.force={cpu:demoFace()};$('message').textContent='CPUの投擲…';render();
+      try{await sleep(600);if(g!==gen)return;await throwDice('cpu',cpuChoose(state,new Set(state.locked)),g)}finally{if(g===gen){state.busy=false;render()}}}
+    function renderDemo(){$('demoBar').hidden=!DEMO;if(!DEMO)return;$('demoWarp').disabled=$('demoWin').disabled=!demoReady();$('demoLose').disabled=state.busy||state.over||!!state.swapMode}
+    /* 12: 最終局面（2-2）。照明・鼓動・癖の強調 */
+    let beatTimer=0;
+    function renderFinal(){const on=finalPhase();if(on&&!document.body.classList.contains('final')){tip('final');if(!$('turnText').textContent.startsWith('最終局面'))$('turnText').textContent='最終局面 — '+$('turnText').textContent}document.body.classList.toggle('final',on);if(on&&sound.on&&!beatTimer){sfx.beat();beatTimer=setInterval(()=>sfx.beat(),1100)}if((!on||!sound.on)&&beatTimer){clearInterval(beatTimer);beatTimer=0}}
     // ブロック目の選択: 1つなら差し替え、2つ（呪い）なら切り替え。満杯なら古い方を外す
     function pickFace(f){if(!state.defend||state.busy)return;const p=state.pick.filter(x=>x!==f);state.pick=p.length<state.pick.length?p:state.need===1?[f]:[...state.pick,f].slice(-state.need);sfx.select();render()}
-    function applyRoll(indices){return indices.map(index=>rollDie(state.dice[index]))}
+    // state.force[who]=目 のとき、その投擲だけ全ダイスをその目にする（デモ用。ワイルドの★も6として同じ扱い）
+    function applyRoll(indices,who){const f=state.force?.[who];if(f)state.force[who]=0;return indices.map(index=>f?state.dice[index].value=f:rollDie(state.dice[index]))}
     function finish(who,raw,dice){
       const r=resolve(raw,dice),values=r.vals,gold=dice.some(d=>d.kind==='gold'),wasUsed=state.used.has(values[0]),result=judge(values,state.used,state.block,[state.player,state.cpu],gold),hit=result==='score',name=who==='player'?'あなた':'CPU',face=faces[values[0]-1]+(r.wild?'（★込み）':''),[misses,swap]=missStep(result,state.misses);
       if(who==='player'&&isTriple(values))showCpuReaction();
@@ -208,13 +255,13 @@
       $('message').textContent={score:values[0]===1?`${name}が🤡×3！ 2-2の決着ルールで1PT獲得`:`${name}が${face}のぞろ目！ ${wasUsed&&gold?'金のダイスで獲得済みの目でも':''}1PT獲得`,blocked:`${name}は${face}のぞろ目…ブロックされて無効${values[0]===1?'（🤡の交換も不発）':''}`,used:`${name}は${face}のぞろ目…獲得済みの目なので0PT`,clown:`${name}が🤡×3！ 全ダイスが新しい個体に交換、獲得済みの目もリセット`,miss:`${name}：ぞろ目なし`}[result]+(swap?` — ${MISS_LIMIT}連続不成立！ 全ダイスを新しい個体に交換（獲得済みの目は維持）`:'');
       sfx[result]();if(swap)sfx.swap();if(hit&&gold&&wasUsed)sfx.gold();if(r.wild&&isTriple(values))tip('wild');if(hit&&gold&&wasUsed)tip('gold');
       if(result!=='miss'&&result!=='score')tip(result);if(swap)tip('swap');if(state.throws>=6&&!memoOn)tip('memo');
-      if(state[who]>=3){state.over=true;$('turnText').textContent=who==='player'?'YOU WIN!':'CPU WIN';$('message').textContent+=who==='player'?' — 勝利！ おめでとうございます':' — CPUの勝利。もう一度挑戦！';recordResult(state.level,who==='player',state.round);setTimeout(()=>sfx[who==='player'?'win':'lose'](),350)}
+      if(state[who]>=3){state.over=true;$('turnText').textContent=who==='player'?'YOU WIN!':'CPU WIN';$('message').textContent+=who==='player'?' — 勝利！ おめでとうございます':' — CPUの勝利。もう一度挑戦！';if(!state.demo)recordResult(state.level,who==='player',state.round);setTimeout(()=>sfx[who==='player'?'win':'lose'](),350)}
       render();return{hit,run:r.run};
     }
     const reduceMotion=matchMedia('(prefers-reduced-motion: reduce)'),rand=(a,b)=>a+Math.random()*(b-a),sleep=ms=>new Promise(r=>setTimeout(r,ms));
     // 立方体の6面 [回転軸, 角度]: 面i+1の向きは 1前 2右 3上 4下 5左 6後（CSSはY軸が下向き。対向面の和=7）
     const FACE_ROT=[['Y',0],['Y',90],['X',90],['X',-90],['Y',-90],['Y',180]];
-    const cubeHtml=die=>`<span class="cube${die.kind?` k-${die.kind}`:''}" aria-hidden="true">${FACE_ROT.map(([a,d],i)=>`<span class="pip${die.marks.includes(i+1)?` scar scar-${die.scar}`:''}${isWild(die,i+1)?' star':''}" style="transform:rotate${a}(${d}deg) translateZ(25cqi)">${isWild(die,i+1)?'★':i?faces[i]:'<img class="clown-mark" src="assets/clown-die-mark.webp" alt="">'}</span>`).join('')}</span>`;
+    const cubeHtml=die=>`<span class="cube${die.kind?` k-${die.kind}`:''}" aria-hidden="true">${FACE_ROT.map(([a,d],i)=>`<span class="pip${die.marks.includes(i+1)?` scar scar-${die.scar}`:''}${isWild(die,i+1)?' star':''}${(die.biasFaces||[]).includes(i+1)?' worn':''}" style="transform:rotate${a}(${d}deg) translateZ(25cqi)">${isWild(die,i+1)?'★':i?faces[i]:'<img class="clown-mark" src="assets/clown-die-mark.webp" alt="">'}</span>`).join('')}</span>`;
     // 出目の面を天面(-Y)へ置き、TILTで天面をカメラ側にも見せる
     const REST={1:[90,0,0],2:[0,0,-90],3:[0,0,0],4:[180,0,0],5:[0,0,90],6:[-90,0,0]},TILT='rotateX(-28deg) rotateY(10deg)';
     // 停止姿勢から X/Y/Z を dx/dy/dz 度巻き戻した姿勢。関数の並びを常に揃え、キーフレーム間を角度のまま補間させる（行列補間だと複数回転が消える）
@@ -223,13 +270,18 @@
     const PATH=[[0,1,0],[.35,.45,-1],[.6,.14,0],[.76,.05,-.3],[.9,.01,0],[1,0,0]];
     // 偏った面を重心方向として扱う。1面特化は低く重く、2面特化は跳ねと蛇行が強い
     function motionProfile(die){const side=[-.35,1,-.2,.2,-1,.35],drift=die.biasFaces.length?die.biasFaces.reduce((sum,n)=>sum+side[n-1],0)/die.biasFaces.length:0;return die.pattern==='single'?{lift:.55,curve:.7,drift:drift*34,wobble:4,spin:.72,duration:1.12}:{lift:1.15,curve:1.25,drift:drift*24,wobble:18,spin:1.18,duration:1}}
+    /* A/C: 偏りの手がかり。確率は出さず、揺れ戻しと着地音で「癖の強さ・種類」を伝える
+       1面特化=短く重い揺れ戻し / 2面特化=長くふらつく / 呪い=さらに重い / ワイルド=揺れない・軽い音。最終局面では1.6倍 */
+    function tellOf(die){if(!die||die.kind==='wild'||!die.biasFaces?.length)return{rock:0,osc:[],dur:0,heavy:0};if(die.kind==='curse')return{rock:10,osc:[1,-.5,.2],dur:430,heavy:2};return die.pattern==='single'?{rock:7,osc:[1,-.45,.15],dur:380,heavy:1}:{rock:6,osc:[1,-.8,.6,-.4,.2],dur:580,heavy:.4}}
+    const finalPhase=()=>!state.over&&state.player===2&&state.cpu===2,heavyOf=die=>tellOf(die).heavy*(finalPhase()?1.3:1);
+    function settle(cube,v,die){const t=tellOf(die);if(!t.rock||reduceMotion.matches){cube.style.transform=rest(v);return}const a=t.rock*(finalPhase()?1.6:1);return cube.animate([{transform:rest(v)},...t.osc.map(m=>({transform:rest(v,a*m*.4,0,a*m)})),{transform:rest(v)}],{duration:t.dur*(finalPhase()?1.25:1),easing:'ease-out'}).finished.then(()=>{cube.style.transform=rest(v)})}
     // 見た目だけ。出目は呼び出し前に確定済み。.die=テーブル上の移動・バウンド、.cube=X/Y/Z回転。player は手前から、cpu は奥から各ダイスの定位置へ
     function animateRoll(indices,values,who){
       const t=$('dice').parentNode.getBoundingClientRect(),near=who==='player',sign=()=>Math.random()<.5?-1:1;
       return Promise.all(indices.map((index,k)=>{
         const button=$('dice').children[index],cube=button.firstChild,end=rest(values[k]);
         cube.style.transform=end; // 停止姿勢を先に設定（アニメはこれを上書きするだけなので、終了時に必ず出目の面で止まる）
-        if(reduceMotion.matches)return button.animate([{opacity:0},{opacity:1}],180).finished.then(()=>sfx.land());
+        if(reduceMotion.matches)return button.animate([{opacity:0},{opacity:1}],180).finished.then(()=>sfx.land(heavyOf(state.dice[index])));
         const motion=motionProfile(state.dice[index]),r=button.getBoundingClientRect(),cx=r.left+r.width/2,cy=r.top+r.height/2,s0=near?1.4:.5,lift=rand(20,45)*motion.lift,curve=rand(-40,40)*motion.curve+motion.drift,
           x0=t.left+t.width*rand(.3,.7),y0=near?t.bottom:t.top, // 手前の手元 or 奥のCPU側から
           // 回転量(度): X は転がる向き（player=奥へ+、cpu=手前へ−）に2〜3.5回転、Y は1〜2回転、Z は0.5〜1.5回転（Y/Zの向きはランダム）
@@ -238,15 +290,15 @@
           clamp=(p,c,lo,hi,h)=>Math.min(Math.max(p,Math.min(lo+h,c)),Math.max(hi-h,c))-c,
           timing={duration:rand(1000,1400)*motion.duration,delay:k*rand(50,110),fill:'backwards'};
         // 最初の着地（PATHの0.35）で着地音
-        setTimeout(()=>sfx.land(),timing.delay+timing.duration*.35);
+        const die=state.dice[index];setTimeout(()=>sfx.land(heavyOf(die)),timing.delay+timing.duration*.35);
         return Promise.all([
           button.animate(PATH.map(([offset,f,up],i)=>{const s=1+(s0-1)*f,h=r.width*.55*s+8,sway=motion.wobble*Math.sin((1-f)*Math.PI*4)*(f+.15);return{offset,easing:i%2?'ease-in':'ease-out',transform:`translate(${clamp(cx+(x0-cx)*f+curve*Math.sin(f*Math.PI)+sway,cx,t.left,t.right,h)}px,${clamp(cy+(y0-cy)*f+up*lift,cy,t.top,t.bottom,h)}px) scale(${s})`}}),timing).finished,
           cube.animate(PATH.map(([offset,f])=>({offset,transform:rest(values[k],...spin.map(a=>a*f))})),timing).finished
-        ]).then(()=>{cube.style.transform=end}); // 最終姿勢へスナップしてから判定へ
+        ]).then(()=>settle(cube,values[k],die)); // 揺れ戻し（A）→最終姿勢へスナップしてから判定へ
       }));
     }
     // 出目を加重抽選で先に確定 → アニメ → 判定（ぞろ目/ブロック/使用済み/ピエロ）。アニメ中にリスタートされたら判定しない
-    async function throwDice(who,indices,g){$('turnText').textContent=`${who==='player'?'あなた':'CPU'}がロール中…`;render();const dice=state.dice,values=applyRoll(indices);await animateRoll(indices,values,who);if(g!==gen)return;$('turnText').textContent='出目を確認中…';$('message').textContent='ダイスが止まりました';await sleep(2000);if(g!==gen)return;const used=indices.map(i=>dice[i]);used.forEach((d,k)=>d.log.push(values[k]));state.throws++;const outcome=finish(who,values,used),sameTable=state.dice===dice,exploded=specialEffects(who,indices,used,sameTable);return{locked:sameTable?indices:[],extra:outcome.run&&!exploded,sameTable,exploded}}
+    async function throwDice(who,indices,g){$('turnText').textContent=`${who==='player'?'あなた':'CPU'}がロール中…`;render();const dice=state.dice,values=applyRoll(indices,who);await animateRoll(indices,values,who);if(g!==gen)return;$('turnText').textContent='出目を確認中…';$('message').textContent='ダイスが止まりました';await sleep(2000);if(g!==gen)return;const used=indices.map(i=>dice[i]);used.forEach((d,k)=>d.log.push(values[k]));state.throws++;const outcome=finish(who,values,used),sameTable=state.dice===dice,exploded=specialEffects(who,indices,used,sameTable);return{locked:sameTable?indices:[],extra:outcome.run&&!exploded,sameTable,exploded}}
     // 判定後の特殊効果。呪い=次に自分が受けるブロック目2つ、導火線=残り-1、0で爆発（次の手番スキップ・控えと入れ替え）。爆発したら true
     function specialEffects(who,indices,used,sameTable){
       const name=who==='player'?'あなた':'CPU',notes=[];let exploded=false;
@@ -284,22 +336,22 @@
           if(!rolled.sameTable)blockedByPlayer.clear();
           if(rolled.extra){$('turnText').textContent='3連番！ CPUの追加手番';$('message').textContent+=' — あなたの手番をスキップ。ブロック目はそのまま';sfx.run();tip('run');render()}
         }while(rolled.extra);
-        state.locked=new Set(rolled.locked);state.round++;
+        state.locked=new Set(rolled.locked);state.round++;state.suspicion=Math.max(0,state.suspicion-SWAP_DECAY);
         if(state.skip.player){state.skip.player=false;state.locked=new Set();enterDefend();$('turnText').textContent='あなたは爆発で手番スキップ — CPUのターン';$('message').textContent+=` — あなたの手番は飛ばされました。CPUの次の投擲に向けてブロック目を${state.need>1?'2つ':''}選んでください`;return}
         state.turn='player';state.block=takeCpuBlock();$('turnText').textContent='あなたのターン';$('message').textContent+=state.block.length>1?' — 呪いの効果：CPUがブロック目を2つ秘密に選びました':' — CPUがブロック目を秘密に選びました';if(state.locked.size)tip('locked');
       }finally{if(g===gen){state.busy=false;render();if(state.defend)$('guardFaces').firstChild.focus()}}
     }
-    function reset(){gen++;clearTimeout(reactionTimer);$('cpuReaction').classList.remove('show');state=fresh();$('level').value=state.level;$('turnText').textContent='あなたのターン';$('message').textContent='振るダイスを3個選んでください（CPUのブロック目は非公開）';render()}
+    function reset(){gen++;clearInterval(beatTimer);beatTimer=0;document.body.classList.remove('final');clearTimeout(reactionTimer);$('cpuReaction').classList.remove('show');state=fresh();$('level').value=state.level;$('turnText').textContent='あなたのターン';$('message').textContent='振るダイスを3個選んでください（CPUのブロック目は非公開）';render()}
 
     /* ---- UI配線 ---- */
     $('guardFaces').replaceChildren(...faces.map((f,i)=>{const b=document.createElement('button');b.className='face';i?b.textContent=f:b.innerHTML='<img class="clown-mark" src="assets/clown-die-mark.webp" alt="">';b.setAttribute('aria-label',i?`${i+1}の目をブロック`:'ピエロをブロック');b.setAttribute('aria-keyshortcuts',String(i+1));b.onclick=()=>pickFace(i+1);return b}));
-    $('roll').onclick=playerTurn;$('confirm').onclick=cpuTurn;$('reset').onclick=reset;$('tipClose').onclick=()=>{$('tip').hidden=true};
+    $('demoWarp').onclick=demoWarp;$('demoWin').onclick=demoWin;$('demoLose').onclick=demoLose;$('swapBtn').onclick=startSwap;$('swapCancel').onclick=cancelSwap;$('roll').onclick=playerTurn;$('confirm').onclick=cpuTurn;$('reset').onclick=reset;$('tipClose').onclick=()=>{$('tip').hidden=true};
     // 難易度: 1投目の前なら即反映。途中なら次のゲームから（戦績を難易度別に正しく数えるため）
     $('level').value=state.level;
     $('level').onchange=e=>{const v=e.target.value;store.set('dd-level',v);if(state.throws===0&&!state.busy&&!state.defend||state.over){if(state.over)return reset();state.level=v;state.block=cpuBlock(state);$('message').textContent=`CPUの強さを「${LEVELS[v]}」にしました`}else $('message').textContent=`CPUの強さ「${LEVELS[v]}」は次のゲームから適用されます（今のゲームは「${LEVELS[state.level]}」）`;render()};
     $('memoBtn').onclick=()=>{memoOn=!memoOn;store.set('dd-memo',memoOn);render()};
     const renderSound=()=>{$('soundBtn').setAttribute('aria-pressed',sound.on);$('soundBtn').textContent=sound.on?'🔊 音':'🔇 音'};
-    $('soundBtn').onclick=()=>{sound.on=!sound.on;store.set('dd-sound',sound.on);renderSound();sfx.select()};renderSound();
+    $('soundBtn').onclick=()=>{sound.on=!sound.on;store.set('dd-sound',sound.on);renderSound();sfx.select();renderFinal()};renderSound();
     // ルール（ページ送り）
     let rulesPage=0;const pages=[...$('rules').querySelectorAll('[data-page]')];
     function showRules(p){rulesPage=Math.max(0,Math.min(pages.length-1,p));pages.forEach((s,i)=>s.hidden=i!==rulesPage);$('rulesPage').textContent=`${rulesPage+1} / ${pages.length}`;$('rulesPrev').disabled=rulesPage===0;$('rulesNext').textContent=rulesPage===pages.length-1?'はじめる':'次へ'}
@@ -312,6 +364,7 @@
       if(e.ctrlKey||e.metaKey||e.altKey||e.repeat||$('rules').open)return;
       const t=e.target,onControl=(t instanceof HTMLButtonElement||t instanceof HTMLSelectElement)&&!t.closest('dialog:not([open])'),k=e.key.toLowerCase();
       if(t instanceof HTMLSelectElement)return;
+      if(state.swapMode&&k==='escape'){e.preventDefault();cancelSwap();return}if(state.swapMode===2)return;
       if(state.defend){if(state.busy)return;if(/^[1-6]$/.test(k)){e.preventDefault();pickFace(+k);if(state.pick.length===state.need)$('confirm').focus()}else if(k==='enter'&&!onControl&&state.pick.length===state.need){e.preventDefault();cpuTurn()}return}
       if(/^[0-9]$/.test(k)){e.preventDefault();toggle(k==='0'?9:+k-1);return}
       if(k==='r'||k==='enter'&&!onControl){if(!$('roll').disabled){e.preventDefault();playerTurn()}}
@@ -335,6 +388,8 @@
     console.assert((()=>{const p=newPool(),sp=p.filter(d=>d.kind);return sp.length===4&&SPECIALS.every(k=>sp.some(d=>d.kind===k))&&sp.every(d=>d.id>=3)&&biasPct(p.find(d=>d.kind==='curse'))===90&&p.find(d=>d.kind==='wild').weights.every(w=>w===1)&&p.find(d=>d.kind==='fuse').fuse===FUSE})(),'特殊ダイス: 4種1個ずつ・特化グループ外・呪い90%・ワイルド偏りなし・導火線は残り3');
     console.assert(judge([4,4,4],new Set([4]),[],[0,0],true)==='score'&&judge([4,4,4],new Set([4]),[4],[0,0],true)==='blocked'&&judge([4,4,4],new Set(),[2,4])==='blocked'&&judge([4,4,4],new Set(),[2,3])==='score','金は獲得済みを無視（ブロックは有効）・ブロック目2つ');
     console.assert((()=>{const W={kind:'wild'},N={};const a=resolve([4,6,4],[N,W,N]),b=resolve([4,6,3],[N,W,N]),c=resolve([2,3,4],[N,W,N]),d=resolve([5,6,4],[N,W,N]),e=resolve([6,6,6],[N,N,N]);return a.vals+''==='4,4,4'&&a.wild&&!isTriple(b.vals)&&c.run&&!d.run&&!isTriple(d.vals)&&e.vals+''==='6,6,6'&&!e.wild})(),'ワイルド★: 他2個に一致・バラバラなら不一致・3連番に数えない・通常ダイスの6は普通の6');
+    console.assert((()=>{const sg={pattern:'single',biasFaces:[3]},pr={pattern:'pair',biasFaces:[2,3]},cu={kind:'curse',pattern:'single',biasFaces:[4]},wd={kind:'wild',pattern:'wild',biasFaces:[]};return tellOf(cu).heavy>tellOf(sg).heavy&&tellOf(sg).heavy>tellOf(pr).heavy&&tellOf(pr).heavy>tellOf(wd).heavy&&tellOf(wd).rock===0&&tellOf(pr).osc.length>tellOf(sg).osc.length})(),'A/C: 癖の重さ 呪い>1面>2面>ワイルド、2面はふらつきが長い');
+    console.assert((cubeHtml({marks:[],scar:1,biasFaces:[2,3]}).match(/ worn/g)||[]).length===2&&!cubeHtml({kind:'wild',marks:[],scar:1,biasFaces:[]}).includes(' worn'),'D: 偏りの面だけ目がかすれる・ワイルドはかすれない');
     console.assert(PATH[0][1]===1&&PATH.at(-1)[1]===0&&PATH.at(-1)[2]===0&&PATH.every(([t],i)=>!i||t>PATH[i-1][0]),'アニメ軌道は開始位置→定位置で終わる');
     console.assert(motionProfile({pattern:'single',biasFaces:[2]}).lift<motionProfile({pattern:'pair',biasFaces:[2,3]}).lift&&motionProfile({pattern:'single',biasFaces:[2]}).drift>0&&motionProfile({pattern:'single',biasFaces:[5]}).drift<0,'偏りタイプと重心面が投擲の跳ね・進行方向に反映される');
     // 面の法線を面回転→停止角で回すと、出目の面だけが天面(-Y)を向く。対向面の和は7
