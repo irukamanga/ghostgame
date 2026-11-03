@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>樽あみだくじ</title>
+<style>
+:root{--ink:#171411;--paper:#ddd3bd;--paper2:#c7b99c;--red:#8b2f25;--gold:#b69752;--dim:#675f52}
+*{box-sizing:border-box}body{margin:0;min-height:100vh;color:var(--ink);font-family:"Yu Mincho","Hiragino Mincho ProN",serif;background:#141210;background-image:radial-gradient(#ffffff0b 1px,transparent 1px);background-size:5px 5px}
+button{font:inherit}.shell{width:min(1080px,100%);margin:auto;padding:18px}.titlebar{display:flex;align-items:end;justify-content:space-between;gap:16px;color:#eee6d3;border-bottom:1px solid #6b5c45;padding:5px 3px 12px}.titlebar h1{margin:0;font-weight:500;letter-spacing:.28em;font-size:clamp(1.45rem,4vw,2.35rem)}.round{font-size:.9rem;color:#baa98c}.scoreboard{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;margin:14px 0;background:#28231d;border:1px solid #514635;color:#eee3cb}.score{padding:11px 15px}.score:last-child{text-align:right}.score strong{font-size:1.65rem;color:var(--gold)}.vs{color:#887b67}.phasebar{display:grid;grid-template-columns:repeat(3,1fr);margin-bottom:14px;border:1px solid #5b4f3e}.phasebar span{padding:9px;text-align:center;color:#817664;background:#211e19;font-size:.82rem;letter-spacing:.08em}.phasebar .on{background:var(--paper2);color:#1d1812;font-weight:bold}.panel{position:relative;background:var(--paper);border:1px solid #7d6e55;box-shadow:0 8px 28px #0008;padding:clamp(14px,3vw,28px);min-height:570px}.panel:before{content:"";position:absolute;inset:6px;border:1px solid #2e271d2b;pointer-events:none}.instruction{text-align:center;position:relative}.instruction h2{font-weight:500;letter-spacing:.12em;margin:0 0 6px}.instruction p{margin:0;color:#534a3d;font-size:.92rem}.budgets{display:flex;justify-content:center;gap:24px;margin:13px 0;font-size:.84rem;color:#554b3d}.budgets b{color:var(--red)}.boards{display:grid;grid-template-columns:1fr 1fr;gap:20px;position:relative}.boardwrap{min-width:0}.boardhead{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #92846d;padding:7px 3px;font-size:.9rem}.boardhead b{font-weight:600}.boardhead small{color:#6b5f4c}.canvasbox{position:relative;margin-top:8px;aspect-ratio:1.28;background:#e8dfcc;border:1px solid #9b8b70}.canvasbox canvas{width:100%;height:100%;display:block}.veil:after{content:"経路は伏せられている";position:absolute;inset:0;display:grid;place-items:center;color:#6b6050;background:repeating-linear-gradient(135deg,#d8ceb9f2 0 8px,#d1c5adf2 8px 16px);letter-spacing:.12em;font-size:.8rem;pointer-events:none}.starts{position:absolute;inset:0;display:grid;grid-template-columns:repeat(4,1fr);align-items:start;padding:3% 9%;gap:4%;pointer-events:none}.starts button{pointer-events:auto;aspect-ratio:1;border-radius:50%;border:1px solid #6e604b;background:#27221c;color:#eee1c8;cursor:pointer;box-shadow:0 2px 0 #0005}.starts button:hover,.starts button:focus-visible{background:var(--red);outline:2px solid #f1dfb6}.controls{display:flex;justify-content:center;gap:10px;margin-top:17px;position:relative}.controls button{border:1px solid #544835;background:#28231d;color:#eee1ca;padding:10px 22px;cursor:pointer;letter-spacing:.08em}.controls button.primary{background:var(--red);border-color:#672219}.controls button:disabled{opacity:.35;cursor:not-allowed}.resultbox{margin:14px auto 0;max-width:680px;border:1px solid #8e7d62;background:#e8deca;padding:13px;text-align:center;min-height:55px}.resultbox strong{color:var(--red)}.counters{display:flex;justify-content:center;gap:30px;margin-top:10px;font-size:.84rem;color:#5e5242}.ripper{color:#8c231c;font-weight:bold}.rules{color:#b8aa90;margin:14px 4px 0;font-size:.78rem;line-height:1.7}.rules summary{cursor:pointer}.hidden{display:none!important}
+.starts{z-index:2}.counters .ripper{display:inline-block;margin-left:5px;padding:3px 7px;color:#fff0d3;background:#8c231c;border:1px solid #5d1712;font-style:normal;letter-spacing:.06em;box-shadow:0 0 0 2px #8c231c22}
+@media(max-width:720px){.shell{padding:8px}.panel{padding:15px 10px;min-height:620px}.boards{grid-template-columns:1fr;gap:16px}.boardhead{display:flex;text-align:left}.boardhead small{display:block}.budgets{gap:10px;justify-content:space-around}.canvasbox{aspect-ratio:1.28}body[data-phase="2"] #cWrap{order:-1}.phasebar span{font-size:.7rem;padding:7px 2px}.controls button{padding:10px 14px}.titlebar h1{letter-spacing:.16em}.counters{align-items:center;gap:8px;flex-direction:column}}
+</style>
+<link rel="stylesheet" href="game-layout.css">
+</head>
+<body class="amida-game">
+<main class="shell">
+<nav class="game-nav" aria-label="ゲーム選択"><span>GHOST ODDS GAMBLE</span><a href="index.html" >イカサマダイス</a><a href="amida.html" aria-current="page">樽あみだくじ</a></nav>
+ <header class="titlebar"><h1>樽あみだくじ</h1><div class="round">第 <span id="round">1</span> 局</div></header>
+ <section class="scoreboard"><div class="score">あなた　<strong id="pScore">0</strong>点</div><div class="vs">対</div><div class="score"><strong id="cScore">0</strong>点　CPU</div></section>
+ <nav class="phasebar" aria-label="進行"><span id="ph1" class="on">一　仕掛け</span><span id="ph2">二　駒置き</span><span id="ph3">三　開帳</span></nav>
+ <div class="amida-cast pirate-cast"><img class="amida-judge" src="assets/bunny-judge-v1.png" alt="ジャッジのバニーガール"><p>海賊との第二戦<span>樽に道を仕掛け、伏せられた道を進め。</span></p><img class="amida-opponent" src="assets/pirate-opponent-v1.png" alt="右目を失った海賊風の対戦相手"></div>
+<section class="panel">
+  <div class="instruction"><h2 id="heading">横棒を仕掛ける</h2><p id="lead">自分の盤面をクリック。横棒は対戦全体で20本まで追加できます。</p></div>
+  <div class="budgets"><span>あなた：残り <b id="pRemain">20</b>本（使用 <span id="pUsed">0</span>）</span><span>CPU：残り <b id="cRemain">20</b>本（使用 <span id="cUsed">0</span>）</span></div>
+  <div class="boardhead"><b>あなたのあみだ</b><b>海賊のあみだ</b></div>
+  <div class="wall-scroll"><svg id="wall" viewBox="0 0 800 530" role="group" aria-label="あみだの壁面"></svg></div>
+  <p id="treasureInfo" aria-live="polite"></p>
+  <div id="result" class="resultbox hidden" aria-live="polite"></div>
+  <p id="editStatus" role="status"></p>
+<div class="controls"><button id="restart" type="button">最初から</button><button id="undo">一手戻す</button><button id="mainBtn" class="primary">仕掛けを完了</button></div>
+ </section>
+ <details class="rules"><summary>遊び方</summary>全5ターン、終了時の点数で勝敗を決めます。同点は引き分け。横棒は各20本、毎ターン最低1本を置きます。同じ段で横棒を連結することはできません。残りターンに必要な本数は確保されます。自分側の宝は設置時から公開されます。設置を終えると相手側の宝も公開され、相手側の入口を選べます。宝は1点。リッパー状態で宝に到達すると2点没収（下限0点）。通った横棒は次のターンに消えます。設置位置はクリック、またはTabで選びEnterで決定できます。空きがない場合は、自分の横棒を選び1本消費して置き直せます（重ね置きにはなりません）。</details>
+</main>
+<style>
+.wall-scroll{overflow-x:auto;margin-top:12px;background:#e8dfcc;border:3px solid #79603e;border-radius:12px}#wall{display:block;width:100%;min-width:600px;touch-action:manipulation}#wall .slot{cursor:pointer;fill:transparent;stroke:none}#wall .slot:hover,#wall .slot:focus{fill:#a77e3333;stroke:#8b2f25;outline:none}#wall .entry{cursor:pointer}#wall .entry:focus{outline:none;stroke:#bb7925;stroke-width:4}#treasureInfo,#editStatus{text-align:center;min-height:1.5em;font-size:14px}
+#wall .seam-slot:hover,#wall .seam-slot:focus{fill:transparent;stroke:none;outline:none}#wall .seam-slot{cursor:default}
+</style>
+<script src="amida-rules.js"></script>
+<script src="amida-game.js"></script>
+</body></html>

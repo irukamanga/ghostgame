@@ -56,9 +56,11 @@
     }
     @media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
   </style>
+<link rel="stylesheet" href="game-layout.css">
 </head>
 <body>
   <main>
+<nav class="game-nav" aria-label="ゲーム選択"><span>GHOST ODDS GAMBLE</span><a href="index.html" aria-current="page">イカサマダイス</a><a href="amida.html">樽あみだくじ</a></nav>
     <header><h1>イカサマ<span>ダイス</span></h1><p class="rule">10個から3個を選んでロール。直前に相手が使った3個は選択不可。未獲得かつブロックされていない目が揃えば1PT。</p></header>
     <div class="toolbar">
       <label>CPU<select id="level" aria-label="CPUの強さ"><option value="easy">よわい</option><option value="normal">ふつう</option><option value="hard">つよい</option></select></label>
@@ -73,11 +75,11 @@
     <p class="used"><span id="blocker">CPU</span>のブロック目（このぞろ目は無効）: <b id="blockFace">-</b>　不成立 <b id="missCount">0/6</b>　ジャッジの疑い <b id="suspicion">0%</b></p>
     <div class="stage"><div class="final-banner" aria-hidden="true">最終局面</div>
       <section class="table" aria-label="ダイステーブル">
-        <div class="cpu"><img class="cpu-body" src="assets/clown-opponent.webp" alt="対戦相手のピエロ"><img class="cpu-reaction" id="cpuReaction" src="assets/clown-shocked-face.webp" alt="" aria-hidden="true"></div>
+        <div class="cpu"><img class="cpu-body" src="assets/jester-opponent-v1.png" alt="対戦相手のピエロ"><span class="cpu-reaction" id="cpuReaction" aria-hidden="true">!?</span></div>
         <div class="felt" aria-hidden="true"></div>
         <div class="dice" id="dice"></div>
       </section>
-      <div class="judge"><img src="assets/judge-bunny.webp" alt="テーブル右側に立つバニー姿のジャッジ"></div>
+      <div class="judge"><img src="assets/bunny-judge-v1.png" alt="テーブル右側に立つバニー姿のジャッジ"></div>
     </div>
     <div class="actions"><button class="roll" id="roll" disabled aria-keyshortcuts="R Enter">3個を選んでロール</button><button class="reset" id="swapBtn" type="button">🤫 すり替え</button><button class="reset" id="reset">リスタート</button></div>
     <div class="demo" id="demoBar" role="group" aria-label="宣伝動画用デモ操作" hidden><span>DEMO</span><button class="tool" id="demoWarp" type="button">⚡ ワープ（ぞろ目）</button><button class="tool" id="demoWin" type="button">🏆 勝利</button><button class="tool" id="demoLose" type="button">💀 敗北</button></div>
